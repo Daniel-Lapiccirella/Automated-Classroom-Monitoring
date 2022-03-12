@@ -1,4 +1,4 @@
-package com.automated.automatedclassroommonitoring
+package com.automated.automatedclassroommonitoring.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
