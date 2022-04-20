@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "390573640938",
+    "project_id": "automated-classroom-monitoring",
+    "storage_bucket": "automated-classroom-monitoring.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390573640938:android:bb833f82f83c5cba7d9b93",
+        "android_client_info": {
+          "package_name": "com.automated.automatedclassroommonitoring"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390573640938-65l7je34s6tj6i1oad9g7qj5j0ecubpv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvUppkuKtXmSLA0X52PP9x5Tbp8EIFs0o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390573640938-65l7je34s6tj6i1oad9g7qj5j0ecubpv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
