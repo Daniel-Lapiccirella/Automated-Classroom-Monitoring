@@ -52,17 +52,14 @@ fun HomeCards(
                         .fillMaxWidth(),
                     style = MaterialTheme.typography.h1,
                     fontSize = 30.sp
-
-
                 )
                 Card(
-                    modifier = Modifier,
                     shape = RoundedCornerShape(0.dp),
                     backgroundColor = IceBerg
                 ) {
                     Column(
                         modifier = Modifier
-                            .padding(top = 15.dp)
+                            .padding(top = 10.dp)
                             .fillMaxWidth()
                     ) {
                         Row(
@@ -90,8 +87,6 @@ fun HomeCards(
                             horizontalArrangement = Arrangement.SpaceAround,
                             verticalAlignment = Alignment.Bottom
                         ) {
-
-
                             Text(
                                 text = "$degree°C",
                                 style = MaterialTheme.typography.h3,
@@ -104,10 +99,7 @@ fun HomeCards(
                             )
                         }
                     }
-
-
                 }
-
             } else {
                 Text(
                     "Attendance",
@@ -132,8 +124,12 @@ fun HomeCards(
 
                         ExpandableCard(
                             courseNumber = "CENG 320",
-                            listOfNames = viewmodel.listOfStudents
-                        )
+                            listOfNames = viewmodel.listOfStudents,
+                            isAttendance = true,
+                            settingsString = "",
+
+
+                            )
 
                     }
                 }
