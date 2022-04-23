@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.ExperimentalMaterialApi
@@ -28,16 +26,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.automated.automatedclassroommonitoring.models.Student
+import com.automated.automatedclassroommonitoring.models.Students
 import com.automated.automatedclassroommonitoring.ui.theme.Shapes
 import com.automated.automatedclassroommonitoring.ui.theme.SteelBlue
 
@@ -45,16 +39,18 @@ import com.automated.automatedclassroommonitoring.ui.theme.SteelBlue
 @Composable
 fun ExpandableCard(
     courseNumber: String,
-    titleFontSize: TextUnit = MaterialTheme.typography.h6.fontSize,
-    titleFontWeight: FontWeight = FontWeight.Bold,
-    listOfNames: MutableList<Student>,
+    listOfNames: MutableList<Students>,
+    isAttendance: Boolean,
+    settingsString: String,
     shape: Shape = Shapes.medium,
-    padding: Dp = 12.dp
+    padding: Dp = 12.dp,
 ) {
     var expandedState by remember { mutableStateOf(false) }
     val rotationState by animateFloatAsState(
         targetValue = if (expandedState) 180f else 0f
     )
+
+
 
     Card(
         backgroundColor = SteelBlue,
@@ -72,7 +68,6 @@ fun ExpandableCard(
             expandedState = !expandedState
         },
 
-
         ) {
         Column(
             modifier = Modifier
@@ -88,7 +83,6 @@ fun ExpandableCard(
                     text = courseNumber,
                     style = MaterialTheme.typography.h2,
                     fontSize = 20.sp,
-                   // fontWeight = titleFontWeight,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -107,18 +101,17 @@ fun ExpandableCard(
                 }
             }
             if (expandedState) {
-                LazyColumn(
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    items(listOfNames) { student ->
-                        student.name?.let {
-                            Text(
-                                style = MaterialTheme.typography.body1,
-                                text = it.replace("\\s".toRegex(), "")
-                            )
-                        }
+                if (isAttendance) {
+                    UpdatingList(listOfNames)
+                } else {
+                    Text(
+                        fontSize = 20.sp,
+                        style = MaterialTheme.typography.body1,
+                        text = settingsString,
+                        modifier = Modifier.padding(5.dp)
+                    )
 
-                    }
+
                 }
             }
         }
@@ -126,9 +119,12 @@ fun ExpandableCard(
 }
 
 
-@ExperimentalMaterialApi
-@Composable
-@Preview
-fun ExpandableCardPreview() {
 
-}
+
+
+
+
+
+
+
+

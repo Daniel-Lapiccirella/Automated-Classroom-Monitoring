@@ -37,7 +37,7 @@ fun SetupNavGraph(
         ) { AttendanceScreen(viewmodel, navController = navController) }
         composable(
             route = "Settings"
-        ) { SettingsScreen() }
+        ) { SettingsScreen(viewmodel, navController = navController) }
         composable(
             route = "SplashScreen"
         ) { SplashScreen(navController = navController) }

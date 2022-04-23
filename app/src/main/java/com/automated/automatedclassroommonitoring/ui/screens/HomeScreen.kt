@@ -1,7 +1,6 @@
 package com.automated.automatedclassroommonitoring.ui.screens
 
 import android.content.Context
-import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,11 +8,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -23,10 +21,7 @@ import com.automated.automatedclassroommonitoring.models.BottomNavItem
 import com.automated.automatedclassroommonitoring.ui.components.BottomNavigationBar
 import com.automated.automatedclassroommonitoring.ui.components.HomeCards
 import com.automated.automatedclassroommonitoring.ui.components.TopBar
-import com.automated.automatedclassroommonitoring.ui.nav.SetupNavGraph
 import com.automated.automatedclassroommonitoring.viewmodels.ACMViewModel
-import androidx.activity.viewModels
-import androidx.navigation.NavHostController
 
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
@@ -39,7 +34,7 @@ fun HomeScreen(viewmodel: ACMViewModel, navController: NavController) {
 
 
     Scaffold(
-        topBar = { TopBar(navController) },
+        topBar = { TopBar(navController, true) },
         bottomBar = {
             BottomNavigationBar(
                 items = listOf(
@@ -75,11 +70,11 @@ fun HomeScreen(viewmodel: ACMViewModel, navController: NavController) {
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
             HomeCards(
-                degree = viewmodel.temphum.last().temp.toString(),
-                humidity = viewmodel.temphum.last().humidity.toString(),
+                degree = viewmodel.temp.observeAsState().value.toString(),
+                humidity = viewmodel.hum.observeAsState().value.toString(),
                 isTemp = true,
                 attendance = "",
-                viewmodel = ACMViewModel()
+                viewmodel = viewmodel
             )
 
             HomeCards(
@@ -87,7 +82,7 @@ fun HomeScreen(viewmodel: ACMViewModel, navController: NavController) {
                 humidity = "55",
                 isTemp = false,
                 attendance = "",
-                viewmodel = ACMViewModel()
+                viewmodel = viewmodel
             )
         }
 

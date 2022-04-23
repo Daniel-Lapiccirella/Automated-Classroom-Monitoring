@@ -22,22 +22,29 @@ import com.automated.automatedclassroommonitoring.ui.theme.YaleBlue
 
 @Composable
 fun TopBar(
-navController: NavController
+    navController: NavController,
+    showSettings: Boolean
 
 
 ) {
     TopAppBar(
         title = {
-            Text(text = "ACM", color = Color.White, modifier = Modifier.fillMaxWidth(),
+            Text(
+                text = "Automatic Classroom Monitoring",
+                color = Color.White,
+                modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Start
-                )},
+            )
+        },
         backgroundColor = YaleBlue,
         actions = {
-            IconButton(onClick = { navController.navigate( "Settings") } ) {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_baseline_settings_24),
-                    contentDescription = "Settings"
+            if (showSettings) {
+                IconButton(onClick = { navController.navigate("Settings") }) {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_baseline_settings_24),
+                        contentDescription = "Settings"
                     )
+                }
             }
         }
     )

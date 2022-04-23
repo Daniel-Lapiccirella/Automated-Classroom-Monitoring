@@ -2,10 +2,9 @@ package com.automated.automatedclassroommonitoring.ui.screens
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -33,11 +32,9 @@ import com.automated.automatedclassroommonitoring.viewmodels.ACMViewModel
 @ExperimentalFoundationApi
 @ExperimentalMaterialApi
 @Composable
-fun AttendanceScreen(viewmodel: ACMViewModel, navController : NavController) {
-
-
+fun AttendanceScreen(viewmodel: ACMViewModel, navController: NavController) {
     Scaffold(
-        topBar = { TopBar(navController) },
+        topBar = { TopBar(navController, true) },
         bottomBar = {
             BottomNavigationBar(
                 items = listOf(
@@ -104,22 +101,40 @@ fun AttendanceScreen(viewmodel: ACMViewModel, navController : NavController) {
 
                         Column(
                             modifier = Modifier
-                                .fillMaxWidth(),
+                                .fillMaxWidth()
+                                .fillMaxHeight(0.9f),
                             horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.SpaceEvenly
+                            verticalArrangement = Arrangement.Top
                         ) {
                             ExpandableCard(
                                 courseNumber = "CENG 320",
-                                listOfNames = viewmodel.listOfStudents
-                            )
+                                isAttendance = true,
+                                listOfNames = viewmodel.listOfStudents,
+                                settingsString = "",
+
+                                )
                             ExpandableCard(
-                                courseNumber = "CENG 355",
-                                listOfNames = viewmodel.listOfStudents
-                            )
+                                courseNumber = "CENG 355 (Inactive)",
+                                isAttendance = true,
+                                listOfNames = viewmodel.emptyClass,
+                                settingsString = "",
+
+                                )
+
                             ExpandableCard(
-                                courseNumber = "CENG 360",
-                                listOfNames = viewmodel.listOfStudents
-                            )
+                                courseNumber = "CENG 360 (Inactive) ",
+                                isAttendance = true,
+                                listOfNames = viewmodel.emptyClass,
+                                settingsString = "",
+
+                                )
+                            ExpandableCard(
+                                courseNumber = "CENG 200 (Inactive) ",
+                                isAttendance = true,
+                                listOfNames = viewmodel.emptyClass,
+                                settingsString = "",
+
+                                )
                         }
 
                     }
